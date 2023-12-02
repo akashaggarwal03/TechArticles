@@ -2,7 +2,6 @@ package com.tech.articles.Controller;
 
 import com.rometools.rome.io.FeedException;
 import com.tech.articles.Models.Article;
-import com.tech.articles.Repository.ArticleRepository;
 import com.tech.articles.Services.RssReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +16,8 @@ import java.util.List;
 public class ArticleController {
 
 
-    @Autowired
-    private ArticleRepository articleRepository;
+//    @Autowired
+//    private ArticleRepository articleRepository;
 
     @Autowired
     private RssReaderService rssReaderService;
@@ -27,6 +26,6 @@ public class ArticleController {
     public List<Article> getLatestArticles() throws FeedException, IOException {
         // Implement logic to fetch and return the latest articles
         // You can add additional filtering, sorting, or limit the number of articles
-        return rssReaderService.readRssFeed("https://eng.uber.com/feed/");
+        return rssReaderService.readRssFeed("https://engineering.fb.com/feed/");
     }
 }
