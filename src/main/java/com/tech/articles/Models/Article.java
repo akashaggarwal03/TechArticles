@@ -12,6 +12,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +44,10 @@ public class Article {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public void getTitle(String title) {
+        this.title = title;
     }
 
 

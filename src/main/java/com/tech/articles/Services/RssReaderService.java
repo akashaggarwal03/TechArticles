@@ -23,30 +23,34 @@ import java.io.BufferedReader;
 @Component
 public class RssReaderService {
 
-    public List<Article> readRssFeed(String rssFeedUrl) throws IOException, FeedException {
+    public List<Article> readRssFeed(List<String> rssFeedUrls) throws IOException, FeedException {
         // Use Apache HttpClient to fetch the RSS feed
+        List<Article> articles = new ArrayList<>();
 
-        URL url = new URL(rssFeedUrl);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        for(String rssFeedUrl: rssFeedUrls){
 
-
-        // Set up HTTP GET request
-        connection.setRequestMethod("GET");
-        // Get the input stream
-        SyndFeedInput input = new SyndFeedInput();
-        SyndFeed feed = input.build(new XmlReader(connection.getInputStream()));
-        connection.disconnect();
+            URL url = new URL(rssFeedUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
 
+            // Set up HTTP GET request
+            connection.setRequestMethod("GET");
+            // Get the input stream
+            SyndFeedInput input = new SyndFeedInput();
+            SyndFeed feed = input.build(new XmlReader(connection.getInputStream()));
+            connection.disconnect();
 
-        Iterator itr = feed.getEntries().iterator();
-        List<Article> results = new ArrayList<>();
-        while (itr.hasNext()) {
-            SyndEntry syndEntry = (SyndEntry) itr.next();
-            results.add(mapToArticle(syndEntry));
+
+
+            Iterator itr = feed.getEntries().iterator();
+            while (itr.hasNext()) {
+                SyndEntry syndEntry = (SyndEntry) itr.next();
+                articles.add(mapToArticle(syndEntry));
+            }
         }
 
-        return results;
+
+        return articles;
     }
 
     /**
@@ -57,8 +61,8 @@ public class RssReaderService {
         Article newsArticle = new Article();
 
         newsArticle.setTitle(syndEntry.getTitle());
-     //   newsArticle.setPubDate(syndEntry.getPublishedDate().toString());
-       // newsArticle.setImgUrl("");
+       // newsArticle.setPubDate(syndEntry.getPublishedDate().toString());
+        newsArticle.setImgUrl("");
         newsArticle.setLink(syndEntry.getLink());
         return newsArticle;
     }
