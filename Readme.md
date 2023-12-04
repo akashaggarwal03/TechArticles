@@ -1,1 +1,5 @@
-Backend Service to fetch Tech articles from all the popular engineering blogs using Rss Feeds. 
+Web-App to fetch latest Tech Articles published on popular tech blogs.
+
+UI: React.
+Backend: Spring Boot.
+Database: Google Sheets.
