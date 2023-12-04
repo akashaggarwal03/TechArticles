@@ -46,8 +46,8 @@ public class Article {
         this.imgUrl = imgUrl;
     }
 
-    public void getTitle(String title) {
-        this.title = title;
+    public String getTitle() {
+        return title;
     }
 
 
