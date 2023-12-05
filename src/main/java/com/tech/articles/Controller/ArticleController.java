@@ -5,6 +5,7 @@ import com.tech.articles.Models.Article;
 import com.tech.articles.Services.GoogleSheetsService;
 import com.tech.articles.Services.RssReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ public class ArticleController {
     private RssReaderService rssReaderService;
 
     @GetMapping("/latest")
+    @CrossOrigin(origins = "http://localhost:3000/")
     public List<Article> getLatestArticles() throws FeedException, IOException, GeneralSecurityException {
         // Implement logic to fetch and return the latest articles
         // You can add additional filtering, sorting, or limit the number of articles
